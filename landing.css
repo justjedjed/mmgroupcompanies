@@ -1,0 +1,129 @@
+/* ===== Google Font ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ===== Root Variables ===== */
+:root {
+    --bg-dark: #0b0d12;
+    --bg-card: rgba(255, 255, 255, 0.08);
+    --gold: #f8d568;
+    --white: #ffffff;
+    --muted: #b8b8b8;
+    --radius: 18px;
+    --blur: blur(14px);
+}
+
+/* ===== Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #151823, var(--bg-dark));
+    color: var(--white);
+    overflow-x: hidden;
+}
+
+/* ===== Header ===== */
+.landing-header {
+    height: 80px;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+    min-height: calc(100vh - 120px);
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+    gap: 60px;
+    padding: 60px 8%;
+}
+
+/* ===== Hero Content ===== */
+.hero-content h1 {
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 35px;
+}
+
+/* ===== Buttons ===== */
+.hero-buttons {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 28px;
+    border-radius: 799px;
+    background: linear-gradient(135deg, var(--gold), #ffd976);
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(248, 213, 104, 0.35);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 45px rgba(248, 213, 104, 0.5);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    box-shadow: none;
+    backdrop-filter: var(--blur);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.orbit-wrapper {
+    width: 620px;      /* gikan 420px */
+    height: 320px;     /* gikan 220px */
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+}
+
+/* Slider */
+.slider {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    animation: autoSlide 15s linear infinite;
+}
+
+/* Slide card */
+.slide {
+    width: 240px;      /* gikan 160px */
+    height: 300px;     /* gikan 200px */
+    padding: 18px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+
+/* Auto slideshow animation */
+@keyframes autoSlide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-80%);
+    }
+}
