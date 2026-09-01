@@ -1,129 +1,660 @@
-/* ===== Google Font ===== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* =========================================================
+   GOOGLE FONT
+========================================================= */
 
-/* ===== Root Variables ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+/* =========================================================
+   ROOT VARIABLES
+========================================================= */
+
 :root {
-    --bg-dark: #0b0d12;
-    --bg-card: rgba(255, 255, 255, 0.08);
-    --gold: #f8d568;
+    --black: #050505;
+    --black-soft: #0d0d0d;
+    --black-card: rgba(255, 255, 255, 0.055);
+
+    --gold-dark: #9a6d10;
+    --gold: #d4af37;
+    --gold-light: #f6d878;
+    --gold-bright: #ffe9a3;
+
     --white: #ffffff;
-    --muted: #b8b8b8;
+    --text: #eeeeee;
+    --muted: #b7b7b7;
+
     --radius: 18px;
-    --blur: blur(14px);
 }
 
-/* ===== Reset ===== */
+
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
     font-family: 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     min-height: 100vh;
-    background: radial-gradient(circle at top, #151823, var(--bg-dark));
+
     color: var(--white);
+
     overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(212, 175, 55, 0.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(212, 175, 55, 0.07),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #050505,
+            #101010 50%,
+            #080808
+        );
 }
 
-/* ===== Header ===== */
+
+/* =========================================================
+   LANDING HEADER
+========================================================= */
+
 .landing-header {
-    height: 80px;
-}
+    height: 85px;
 
-/* ===== Hero Section ===== */
-.hero {
-    min-height: calc(100vh - 120px);
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
+    display: flex;
     align-items: center;
-    gap: 60px;
-    padding: 60px 8%;
 }
 
-/* ===== Hero Content ===== */
+
+/* =========================================================
+   HERO SECTION
+========================================================= */
+
+.hero {
+    position: relative;
+
+    min-height: calc(100vh - 85px);
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(400px, 0.9fr);
+
+    align-items: center;
+
+    gap: 70px;
+
+    padding:
+        70px
+        clamp(30px, 7vw, 110px)
+        90px;
+
+    overflow: hidden;
+}
+
+
+/* Decorative gold glow */
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 450px;
+    height: 450px;
+
+    left: -180px;
+    top: 10%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(212, 175, 55, 0.13),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+/* Bottom gold line */
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+
+    width: min(900px, 70%);
+
+    height: 1px;
+
+    transform: translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(212, 175, 55, 0.5),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.hero-content {
+    position: relative;
+
+    z-index: 5;
+
+    max-width: 650px;
+}
+
+
+/* Small luxury label */
+.hero-content::before {
+    content: "WELCOME";
+
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    padding: 7px 15px;
+
+    border: 1px solid rgba(212, 175, 55, 0.45);
+
+    border-radius: 50px;
+
+    color: var(--gold-light);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 3px;
+
+    background:
+        rgba(212, 175, 55, 0.06);
+
+    box-shadow:
+        0 0 20px rgba(212, 175, 55, 0.08);
+}
+
+
+/* Main title */
 .hero-content h1 {
-    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    font-family: 'Cinzel', serif;
+
+    font-size:
+        clamp(2.8rem, 5vw, 5.2rem);
+
     font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 20px;
+
+    line-height: 1.08;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 24px;
+
+    color: var(--white);
+
+    text-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.7);
 }
 
+
+/* Gold emphasis */
+.hero-content h1 span {
+    color: var(--gold-light);
+
+    text-shadow:
+        0 0 20px rgba(212, 175, 55, 0.20);
+}
+
+
+/* Description */
 .hero-content p {
-    font-size: 1.1rem;
+    max-width: 560px;
+
+    margin-bottom: 38px;
+
     color: var(--muted);
-    max-width: 520px;
-    margin-bottom: 35px;
+
+    font-size:
+        clamp(0.95rem, 1.4vw, 1.12rem);
+
+    font-weight: 300;
+
+    line-height: 1.8;
+
+    letter-spacing: 0.3px;
 }
 
-/* ===== Buttons ===== */
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
+
 .hero-buttons {
     display: flex;
-    gap: 18px;
+
+    align-items: center;
+
+    gap: 15px;
+
     flex-wrap: wrap;
 }
 
+
+/* Main button */
 .btn {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 150px;
+
     padding: 14px 28px;
-    border-radius: 799px;
-    background: linear-gradient(135deg, var(--gold), #ffd976);
-    color: #000;
-    font-weight: 600;
+
+    border: 1px solid rgba(255, 230, 150, 0.5);
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a87912,
+            #f6d878 45%,
+            #c69a2d 70%,
+            #9a6d10
+        );
+
+    color: #090909;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(248, 213, 104, 0.35);
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px rgba(212, 175, 55, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.55);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
+}
+
+
+/* Gold shine */
+.btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.55),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.7s ease;
+}
+
+.btn:hover::before {
+    left: 140%;
 }
 
 .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 18px 45px rgba(248, 213, 104, 0.5);
+    transform: translateY(-4px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 15px 40px rgba(212, 175, 55, 0.4),
+        0 0 20px rgba(212, 175, 55, 0.15);
 }
 
+
+/* =========================================================
+   SECONDARY BUTTON
+========================================================= */
+
 .btn-secondary {
-    background: transparent;
+    background:
+        rgba(255, 255, 255, 0.035);
+
     color: var(--white);
-    border: 1.5px solid rgba(255, 255, 255, 0.25);
-    box-shadow: none;
-    backdrop-filter: var(--blur);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.20);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.btn-secondary::before {
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(246, 216, 120, 0.35),
+            transparent
+        );
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.12);
+    color: var(--gold-light);
+
+    border-color:
+        rgba(212, 175, 55, 0.55);
+
+    background:
+        rgba(212, 175, 55, 0.08);
 }
+
+
+/* =========================================================
+   ORBIT / SLIDER WRAPPER
+========================================================= */
 
 .orbit-wrapper {
-    width: 620px;      /* gikan 420px */
-    height: 320px;     /* gikan 220px */
-    overflow: hidden;
     position: relative;
+
+    width: min(650px, 100%);
+
+    height: 390px;
+
     margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(212, 175, 55, 0.08),
+            transparent 65%
+        );
+
+    border:
+        1px solid rgba(212, 175, 55, 0.18);
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-/* Slider */
+
+/* =========================================================
+   SLIDER
+========================================================= */
+
 .slider {
     display: flex;
-    gap: 30px;
+
+    align-items: center;
+
+    gap: 25px;
+
     width: max-content;
-    animation: autoSlide 15s linear infinite;
+
+    animation:
+        autoSlide 18s linear infinite;
 }
 
-/* Slide card */
+
+/* Pause on hover */
+.orbit-wrapper:hover .slider {
+    animation-play-state: paused;
+}
+
+
+/* =========================================================
+   SLIDE CARD
+========================================================= */
+
 .slide {
-    width: 240px;      /* gikan 160px */
-    height: 300px;     /* gikan 200px */
-    padding: 18px;
-    object-fit: contain;
+    position: relative;
+
+    width: 240px;
+
+    height: 320px;
+
     flex-shrink: 0;
+
+    padding: 12px;
+
+    object-fit: contain;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.09),
+            rgba(255, 255, 255, 0.025)
+        );
+        
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.45),
+        0 0 20px rgba(212, 175, 55, 0.06);
+
+    transition:
+        transform 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
 }
 
 
-/* Auto slideshow animation */
+/* Hover slide */
+.slide:hover {
+    transform:
+        translateY(-8px)
+        scale(1.03);
+
+    border-color:
+        rgba(247, 193, 15, 0.75);
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.55),
+        0 0 25px rgba(212, 175, 55, 0.22);
+}
+
+
+/* =========================================================
+   SLIDER ANIMATION
+========================================================= */
+
 @keyframes autoSlide {
-    from {
+
+    0% {
         transform: translateX(0);
     }
-    to {
-        transform: translateX(-80%);
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media screen and (max-width: 1000px) {
+
+    .hero {
+        grid-template-columns: 1fr;
+
+        text-align: center;
+
+        gap: 50px;
+
+        padding-top: 60px;
+    }
+
+    .hero-content {
+        max-width: 700px;
+
+        margin: 0 auto;
+    }
+
+    .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .orbit-wrapper {
+        width: min(650px, 95vw);
+
+        height: 350px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media screen and (max-width: 600px) {
+
+    .landing-header {
+        height: 70px;
+    }
+
+    .hero {
+        min-height: auto;
+
+        padding:
+            50px 20px
+            70px;
+
+        gap: 45px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.4rem;
+
+        letter-spacing: 1px;
+    }
+
+    .hero-content p {
+        font-size: 0.92rem;
+
+        line-height: 1.7;
+
+        margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+
+        max-width: 280px;
+    }
+
+    .orbit-wrapper {
+        width: 100%;
+
+        height: 300px;
+
+        border-radius: 18px;
+    }
+
+    .slider {
+        gap: 16px;
+    }
+
+    .slide {
+        width: 190px;
+
+        height: 250px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media screen and (max-width: 400px) {
+
+    .hero-content h1 {
+        font-size: 2.1rem;
+    }
+
+    .hero-content::before {
+        font-size: 9px;
+
+        letter-spacing: 2px;
+    }
+
+    .orbit-wrapper {
+        height: 260px;
+    }
+
+    .slide {
+        width: 165px;
+
+        height: 220px;
     }
 }
