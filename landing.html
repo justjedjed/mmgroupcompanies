@@ -1,70 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Welcome to M'M Group of Companies — your trusted partner in hospitality, business and lifestyle.">
-    <meta name="theme-color" content="#050505">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Welcome to M'M Group of Companies — your trusted partner in hospitality, business and lifestyle."
+    />
+    <meta name="theme-color" content="#050505" />
     <title>Welcome to M'M Group of Companies</title>
-    <link rel="stylesheet" href="landing.css">
-    <link rel="icon" type="image/png" href="image/m.png">
-</head>
+    <link rel="stylesheet" href="landing.css" />
+    <link rel="icon" type="image/png" href="image/m.png" />
+  </head>
 
-<body>
+  <body>
     <a href="#main" class="skip-link">Skip to content</a>
 
     <main id="main">
-        <section class="hero" aria-label="Welcome hero">
-            <div class="hero-content">
-                <h1>Welcome to <span>M'M Group</span> of Companies</h1>
-                <p>Your trusted partner in hospitality, business, and lifestyle — building excellence across Tandag and beyond.</p>
-                <div class="hero-buttons">
-                    <a href="index.html" class="btn">Explore Our Websites</a>
-                    <a href="fb-pages.html" class="btn btn-secondary">Visit Our FB Pages</a>
-                </div>
-                <ul class="hero-stats" aria-label="Company highlights">
-                    <li><strong>4+</strong><span>Businesses</span></li>
-                    <li><strong>24/7</strong><span>Hospitality</span></li>
-                    <li><strong>100%</strong><span>Trusted</span></li>
-                </ul>
-            </div>
+      <section class="hero" aria-label="Welcome hero">
+        <div class="hero-content">
+          <h1>Welcome to <span>M'M Group</span> of Companies</h1>
+          <p>
+            Your trusted partner in hospitality, business, and lifestyle —
+            building excellence across Tandag and beyond.
+          </p>
+          <div class="hero-buttons">
+            <a href="index.html" class="btn">Explore Our Websites</a>
+            <a href="fb-pages.html" class="btn btn-secondary"
+              >Visit Our FB Pages</a
+            >
+          </div>
+          <ul class="hero-stats" aria-label="Company highlights">
+            <li><strong>4+</strong><span>Businesses</span></li>
+            <li><strong>24/7</strong><span>Hospitality</span></li>
+            <li><strong>100%</strong><span>Trusted</span></li>
+          </ul>
+        </div>
 
-            <!-- ORBIT / INFINITE SLIDER -->
-            <div class="orbit-wrapper" aria-hidden="true">
-                <div class="slider">
-                    <img src="./image/5.png" class="slide" alt="" loading="lazy">
-                    <img src="./image/2.png" class="slide" alt="" loading="lazy">
-                    <img src="./image/1.png" class="slide" alt="" loading="lazy">
-                    <img src="./image/4.png" class="slide" alt="" loading="lazy">
-                    <!-- duplicate for seamless infinite -->
-                    <img src="./image/5.png" class="slide" alt="" loading="lazy" aria-hidden="true">
-                    <img src="./image/2.png" class="slide" alt="" loading="lazy" aria-hidden="true">
-                    <img src="./image/1.png" class="slide" alt="" loading="lazy" aria-hidden="true">
-                    <img src="./image/4.png" class="slide" alt="" loading="lazy" aria-hidden="true">
-                </div>
-            </div>
-        </section>
+        <!-- ORBIT / INFINITE SLIDER -->
+        <div class="orbit-wrapper" aria-hidden="true">
+          <div class="slider">
+            <img src="./image/5.png" class="slide" alt="" loading="lazy" />
+            <img src="./image/2.png" class="slide" alt="" loading="lazy" />
+            <img src="./image/1.png" class="slide" alt="" loading="lazy" />
+            <img src="./image/4.png" class="slide" alt="" loading="lazy" />
+            <!-- duplicate for seamless infinite -->
+            <img
+              src="./image/5.png"
+              class="slide"
+              alt=""
+              loading="lazy"
+              aria-hidden="true"
+            />
+            <img
+              src="./image/2.png"
+              class="slide"
+              alt=""
+              loading="lazy"
+              aria-hidden="true"
+            />
+            <img
+              src="./image/1.png"
+              class="slide"
+              alt=""
+              loading="lazy"
+              aria-hidden="true"
+            />
+            <img
+              src="./image/4.png"
+              class="slide"
+              alt=""
+              loading="lazy"
+              aria-hidden="true"
+            />
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="landing-footer">
-        <p>&copy; 2026 M'M Group of Companies. All Rights Reserved.</p>
-        <nav class="footer-nav" aria-label="Footer">
-            <a href="landing.html">Home</a>
-            <a href="index.html">Websites</a>
-            <a href="fb-pages.html">FB Pages</a>
-        </nav>
+      <p>&copy; 2026 M'M Group of Companies. All Rights Reserved.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="landing.html">Home</a>
+        <a href="index.html">Websites</a>
+        <a href="fb-pages.html">FB Pages</a>
+      </nav>
     </footer>
 
     <script>
-        // Pause orbit on visibility hidden for performance
-        const orbit = document.querySelector('.orbit-wrapper .slider');
-        if (orbit) {
-            document.addEventListener('visibilitychange', () => {
-                orbit.style.animationPlayState = document.hidden ? 'paused' : 'running';
-            });
-        }
+      // Pause orbit on visibility hidden for performance
+      const orbit = document.querySelector(".orbit-wrapper .slider");
+      if (orbit) {
+        document.addEventListener("visibilitychange", () => {
+          orbit.style.animationPlayState = document.hidden
+            ? "paused"
+            : "running";
+        });
+      }
     </script>
-</body>
-
+  </body>
 </html>
