@@ -1,306 +1,734 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
 body {
     margin: 0;
-    background-color: #000;
-    /* Black background */
-    color: #f5f5f5;
-    /* Light text */
-    font-family: Poppins;
-    font-size: 12px;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: #050505;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    overflow: hidden;
 }
 
 a {
     text-decoration: none;
 }
+
+
+/* =========================================================
+   NAVBAR — LUXURY BLACK & GOLD
+========================================================= */
+
 header {
-    width: 2240px;
-    max-width: 100%;
-    margin: auto;
-    height: 45px; /* Reduced height */
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: min(1200px, calc(100% - 40px));
+    height: 62px;
+
     display: flex;
     align-items: center;
-    position: relative;
-    z-index: 100;
-    background-color: #db9e106b;
+    justify-content: center;
+
+    z-index: 1000;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(12, 12, 12, 0.94),
+            rgba(28, 24, 12, 0.92)
+        );
+
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 0 25px rgba(212, 175, 55, 0.08);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(212, 175, 55, 0.12),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 header a {
-    color: #000000;
+    position: relative;
+
+    color: #d8d8d8;
+    font-size: 14px;
     font-weight: 600;
-    margin-right: 10px;
-    padding: 5px 10px; /* Reduce padding para dili dako */
-    text-decoration: none;
-    transition: 0.3s ease;
-    font-size: 15px;
+
+    letter-spacing: 1.5px;
+
+    padding: 11px 20px;
+
+    border-radius: 10px;
+
+    transition:
+        color 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
+
+header a::after {
+    content: "";
+
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+
+    width: 0;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        #a87912,
+        #f4d77d,
+        #a87912
+    );
+
+    transform: translateX(-50%);
+
+    transition: width 0.3s ease;
+}
+
 header a:hover {
-    color: #db9a19;
-    background: linear-gradient(45deg, #000000, #333333);
-    border-radius: 0; /* Square edges */
-    transform: translateY(-3px);
+    color: #f4d77d;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(212, 175, 55, 0.15),
+            rgba(212, 175, 55, 0.05)
+        );
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 20px rgba(212, 175, 55, 0.12);
+}
+
+header a:hover::after {
+    width: 45%;
 }
 
 header a.active {
-    color: #ffffff;
-    background: linear-gradient(45deg, #000000, #333333);
-    border-radius: 0; /* Square edges */
+    color: #080808;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b8861b,
+            #f6d878 45%,
+            #c69a2d 70%,
+            #9a6d10
+        );
+
+    box-shadow:
+        0 5px 20px rgba(212, 175, 55, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
-a.active,
-header a:hover {
-    background: #d4af37; /* Gold background on hover/active */
-    color: #000;          /* Black text on hover/active */
-    border-radius: 2px;
+header a.active::after {
+    display: none;
 }
 
 
-/**************************************************** slider section *****************************************************/
+/* =========================================================
+   SLIDER
+========================================================= */
 
 .slider {
-    height: 100vh;
-    margin-top: -50px;
-    width: 100vw;
-    overflow: hidden;
     position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background: #050505;
 }
 
+
+/* =========================================================
+   SLIDER ITEMS
+========================================================= */
+
 .slider .list .item {
+    position: absolute;
+
+    inset: 0;
+
     width: 100%;
     height: 100%;
-    position: absolute;
-    inset: 0 0 0 0;
 }
 
 .slider .list .item img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
-    /* Fit in screen without zoom */
     object-position: center;
-    background-color: #000;
+
+    background: #111;
+
+    /* BRIGHT LUXURY LOOK */
+    filter:
+        brightness(1.08)
+        contrast(1.05)
+        saturate(1.08);
+
+    transform: scale(1.01);
 }
 
-.slider .list .item .content {
+
+/* =========================================================
+   PREMIUM IMAGE LIGHTING
+========================================================= */
+
+.slider::after {
+    content: "";
+
     position: absolute;
-    top: 15%;
-    width: 1140px;
-    max-width: 80%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-right: 30%;
-    box-sizing: border-box;
-    color: #f5f5f5;
-    /* Light text */
-    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+    inset: 0;
+
+    pointer-events: none;
+    z-index: 2;
+
+    /* LIGHT LUXURY OVERLAY */
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.38) 0%,
+            rgba(0, 0, 0, 0.18) 35%,
+            rgba(0, 0, 0, 0.04) 70%,
+            rgba(0, 0, 0, 0.12) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.28) 0%,
+            transparent 45%,
+            rgba(0, 0, 0, 0.05) 100%
+        );
 }
+/* =========================================================
+   CONTENT
+========================================================= */
+.slider .list .item .content .title {
+    margin-bottom: 14px;
+
+    font-family: 'Cinzel', serif;
+
+    font-size: clamp(48px, 5vw, 76px);
+
+    font-weight: 800;
+
+    line-height: 1.05;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    color: #f2c94c;
+
+    text-shadow:
+        0 2px 3px rgba(0, 0, 0, 0.85),
+        0 0 8px rgba(255, 207, 70, 0.25);
+
+    max-width: 850px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
 
 .slider .list .item .content .title {
-    color: #d4af37;
-    text-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    margin-bottom: 14px;
+
+    color: #f8a100;
+
     font-family: 'Cinzel', serif;
+
+    font-size: clamp(42px, 5.8vw, 86px);
+
     font-weight: 800;
-    /* BOLD */
+
+    line-height: 1.05;
+
     letter-spacing: 3px;
-    font-size: 6.5em;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.85);
+    
 }
 
+
+/* =========================================================
+   SUBTITLE
+========================================================= */
 .slider .list .item .content .type {
+    max-width: 650px;
+
+    margin-top: 15px;
+
     color: #ffffff;
-    text-shadow: 0 0 15px rgba(18, 18, 18, 0.4);
-    font-family: serif;
-    font-size: 3.5em;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: clamp(17px, 1.8vw, 26px);
+
+    font-weight: 400;
+
+    line-height: 1.45;
+
+    letter-spacing: 0.5px;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.85);
 }
 
-.slider .list .item .type {
-    color: #d4af37;
-    /* Gold accent */
-}
 
-.slider .list .item .button {
-    display: grid;
-    grid-template-columns: repeat(2, 130px);
-    grid-template-rows: 40px;
-    gap: 5px;
-    margin-top: 20px;
-}
-
+/* =========================================================
+   VISIT BUTTON
+========================================================= */
 .slider .list .item .button button {
+    min-width: 145px;
+    height: 48px;
+
+    padding: 0 28px;
+
     border: none;
-    background-color: #d4af37;
-    /* Gold button */
-    color: #000;
-    font-family: Poppins;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.4s;
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f3aa01 0%,
+            #ffcb0e 45%,
+            #fdc730 75%,
+            #f7b234 100%
+        );
+
+    color: #111;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 13px;
+    font-weight: 700;
+
     letter-spacing: 2px;
+
+    cursor: pointer;
+
+   
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
 }
 
 .slider .list .item .button button:hover {
-    background-color: #f5d76e;
-    /* Lighter gold hover */
-    letter-spacing: 3px;
+    transform: translateY(-3px);
+
+    filter: brightness(1.12);
+
+    box-shadow:
+        0 12px 35px rgba(212, 175, 55, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-.slider .list .item .button button:nth-child(2) {
-    background-color: transparent;
-    border: 1px solid #d4af37;
-    color: #d4af37;
+/* =========================================
+   SLIDER CONTENT — KEEP TEXT ABOVE OVERLAY
+========================================= */
+
+.slider .list .item .content {
+    position: absolute;
+    z-index: 10;
 }
 
-
-/******************************************************* Thumbnail Section ***********************************************/
-
+/* Make sure text stays visible */
+.slider .list .item .content .title,
+.slider .list .item .content .type,
+.slider .list .item .content .description,
+.slider .list .item .content .button {
+    position: relative;
+    z-index: 11;
+}
+/* =========================================================
+   THUMBNAILS
+========================================================= */
 .thumbnail {
     position: absolute;
-    bottom: 50px;
-    left: 50%;
+
+    right: 55px;
+    bottom: 55px;
+
     width: max-content;
-    z-index: 100;
+
     display: flex;
-    gap: 20px;
+    gap: 14px;
+
+    z-index: 20;
+
+    padding: 12px;
+
+    border: 1px solid rgba(229, 190, 67, 0.55);
+    border-radius: 14px;
+
+    background: rgba(12, 12, 12, 0.72);
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.35),
+        0 0 20px rgba(212, 175, 55, 0.08);
+
+    backdrop-filter: blur(10px);
 }
 
 .thumbnail .item {
-    width: 150px;
-    height: 220px;
-    flex-shrink: 0;
     position: relative;
-    border: 2px solid transparent; /* default border */
-    transition: border 0.3s;
+
+    width: 105px;
+    height: 145px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    opacity: 0.9;
+
+    transition:
+        transform 0.35s ease,
+        opacity 0.35s ease,
+        border 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
 .thumbnail .item img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
-    border-radius: 2px;
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.35);
-    /* Gold glow */
+
+    filter:
+        brightness(1.05)
+        contrast(1.05);
+
+    transition: transform 0.4s ease;
+}
+/* =========================================================
+   THUMBNAIL — LUXURY GOLD SHINE HOVER
+========================================================= */
+
+.thumbnail .item {
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.35s ease,
+        opacity 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/* Gold light sweep */
+.thumbnail .item::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -130%;
+
+    width: 65%;
+    height: 100%;
+
+    z-index: 5;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.08),
+            rgba(246, 216, 120, 0.55),
+            rgba(255, 255, 255, 0.10),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    pointer-events: none;
+}
+
+/* Hover */
+.thumbnail .item:hover {
+    opacity: 1;
+
+    transform:
+        translateY(-7px)
+        scale(1.03);
+
+    border-color: #f2c94c;
+
+    box-shadow:
+        0 10px 28px rgba(212, 175, 55, 0.35),
+        0 0 18px rgba(212, 175, 55, 0.25);
+}
+
+/* Shine animation */
+.thumbnail .item:hover::before {
+    left: 140%;
+
+    transition: left 0.75s ease;
+}
+
+/* Make image slightly brighter */
+.thumbnail .item:hover img {
+    filter:
+        brightness(1.15)
+        contrast(1.06)
+        saturate(1.1);
+
+    transform: scale(1.05);
 }
 
 .thumbnail .item.active {
-    border: 2px solid gold; /* highlight color */
-    transform: scale(1.05); /* optional: slightly enlarge active thumb */
+    opacity: 1;
+
+    border: 2px solid #f1ca4c;
+
+    transform: translateY(-7px) scale(1.04);
+
+    box-shadow:
+        0 8px 30px rgba(212, 175, 55, 0.4),
+        0 0 15px rgba(242, 201, 76, 0.25);
 }
 
+/* ACTIVE THUMBNAIL */
 
-/*********************************************************** nextPrevArrows Section ************************************/
+.thumbnail .item.active {
+    opacity: 1;
 
-.nextPrevArrows {
+    border: 2px solid #e2bd48;
+
+    transform: translateY(-7px) scale(1.04);
+
+    box-shadow:
+        0 8px 25px rgba(212, 175, 55, 0.25),
+        0 0 18px rgba(212, 175, 55, 0.16);
+}
+
+.thumbnail .item.active::after {
+    content: "";
+
     position: absolute;
-    top: 80%;
-    right: 52%;
-    z-index: 100;
-    width: 300px;
-    max-width: 30%;
-    display: flex;
-    gap: 10px;
-    align-items: center;
+    inset: 0;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 221, 120, 0.15),
+            transparent 45%
+        );
+
+    pointer-events: none;
 }
 
+
+/* =========================================================
+   NEXT / PREVIOUS BUTTONS
+========================================================= */
 .nextPrevArrows button {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(242, 201, 76, 0.8);
     border-radius: 50%;
-    background-color: #d4af37;
-    border: none;
-    color: #000;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25, 25, 25, 0.95),
+            rgba(5, 5, 5, 0.9)
+        );
+
+    color: #f2c94c;
+
     font-family: monospace;
+    font-size: 20px;
     font-weight: bold;
-    transition: .5s;
+
     cursor: pointer;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.35),
+        0 0 12px rgba(212, 175, 55, 0.1);
+
+    transition: 0.3s ease;
 }
 
 .nextPrevArrows button:hover {
-    background-color: #f5d76e;
-    color: #000;
+    background:
+        linear-gradient(
+            135deg,
+            #c9951f,
+            #ffe58a,
+            #c9951f
+        );
+
+    color: #111;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 25px rgba(212, 175, 55, 0.45);
 }
-
-
-/*************************************** Animation Part */
+/* =========================================================
+   ANIMATION
+========================================================= */
 
 .slider .list .item:nth-child(1) {
     z-index: 1;
 }
 
 
-/************************* animation text in first item */
+/* TEXT ENTER */
 
 .slider .list .item:nth-child(1) .content .title,
-.slider .list .item:nth-child(1) .content .type,
-.slider .list .item:nth-child(1) .content .description,
-.slider .list .item:nth-child(1) .content .buttons {
-    transform: translateY(50px);
-    filter: blur(20px);
+.slider .list .item:nth-child(1) .content .type {
+    transform: translateY(45px);
+
+    filter: blur(12px);
+
     opacity: 0;
-    animation: showContent .5s 1s linear 1 forwards;
+
+    animation:
+        showContent 0.7s 0.4s
+        cubic-bezier(.22, .61, .36, 1)
+        forwards;
 }
 
-
-/********************* Animate buttons like title & type */
+.slider .list .item:nth-child(1) .content .type {
+    animation-delay: 0.55s;
+}
 
 .slider .list .item:nth-child(1) .content .button {
-    transform: translateY(50px);
-    filter: blur(20px);
+    transform: translateY(35px);
+
+    filter: blur(10px);
+
     opacity: 0;
-    animation: showContent .5s 1.2s linear 1 forwards;
+
+    animation:
+        showContent 0.7s 0.7s
+        cubic-bezier(.22, .61, .36, 1)
+        forwards;
 }
 
 @keyframes showContent {
     to {
-        transform: translateY(0px);
-        filter: blur(0px);
+        transform: translateY(0);
+        filter: blur(0);
         opacity: 1;
     }
 }
 
-.slider .list .item:nth-child(1) .content .title {
-    animation-delay: 0.4s !important;
-}
 
-.slider .list .item:nth-child(1) .content .type {
-    animation-delay: 0.6s !important;
-}
-
-.slider .list .item:nth-child(1) .content .description {
-    animation-delay: 0.8s !important;
-}
-
-.slider .list .item:nth-child(1) .content .buttons {
-    animation-delay: 1s !important;
-}
-
-
-/****************** Animation for next button click */
+/* =========================================================
+   NEXT ANIMATION
+========================================================= */
 
 .slider.next .list .item:nth-child(1) img {
-    width: 150px;
-    height: 220px;
     position: absolute;
-    bottom: 50px;
-    left: 50%;
-    border-radius: 30px;
-    animation: showImage .5s linear 1 forwards;
+
+    width: 105px;
+    height: 145px;
+
+    bottom: 55px;
+    left: calc(100% - 160px);
+
+    border-radius: 10px;
+
+    animation:
+        showImage 0.55s
+        cubic-bezier(.22, .61, .36, 1)
+        forwards;
 }
 
 @keyframes showImage {
     to {
         bottom: 0;
         left: 0;
+
         width: 100%;
         height: 100%;
+
         border-radius: 0;
     }
 }
 
-.slider.next .thumbnail .item:nth-last-child(1) {
+.slider.next .thumbnail .item:last-child {
     overflow: hidden;
-    animation: showThumbnail .5s linear 1 forwards;
-}
 
-.slider.prev .list .item img {
-    z-index: 100;
+    animation:
+        showThumbnail 0.55s
+        ease forwards;
 }
 
 @keyframes showThumbnail {
@@ -310,95 +738,115 @@ header a:hover {
     }
 }
 
-.slider.next .thumbnail {
-    animation: effectNext .5s linear 1 forwards;
-}
 
-@keyframes effectNext {
-    from {
-        transform: translateX(150px);
-    }
-}
-
-
-/************ Animation for prev button click */
+/* =========================================================
+   PREVIOUS ANIMATION
+========================================================= */
 
 .slider.prev .list .item:nth-child(2) {
     z-index: 2;
 }
 
 .slider.prev .list .item:nth-child(2) img {
-    animation: outFrame 0.5s linear 1 forwards;
     position: absolute;
+
     bottom: 0;
     left: 0;
+
+    z-index: 100;
+
+    animation:
+        outFrame 0.55s
+        cubic-bezier(.22, .61, .36, 1)
+        forwards;
 }
 
 @keyframes outFrame {
     to {
-        width: 150px;
-        height: 220px;
-        bottom: 50px;
-        left: 50%;
-        border-radius: 20px;
+        width: 105px;
+        height: 145px;
+
+        bottom: 55px;
+        left: calc(100% - 160px);
+
+        border-radius: 10px;
     }
 }
 
-.slider.prev .thumbnail .item:nth-child(1) {
+.slider.prev .thumbnail .item:first-child {
     overflow: hidden;
+
     opacity: 0;
-    animation: showThumbnail .5s linear 1 forwards;
+
+    animation:
+        showThumbnail 0.55s
+        ease forwards;
 }
+
+
+/* =========================================================
+   DISABLE BUTTON DURING ANIMATION
+========================================================= */
 
 .slider.next .nextPrevArrows button,
 .slider.prev .nextPrevArrows button {
     pointer-events: none;
 }
 
+
+/* =========================================================
+   PREVIOUS CONTENT EXIT
+========================================================= */
+
 .slider.prev .list .item:nth-child(2) .content .title,
 .slider.prev .list .item:nth-child(2) .content .type,
-.slider.prev .list .item:nth-child(2) .content .description,
-.slider.prev .list .item:nth-child(2) .content .buttons {
-    animation: contentOut 1.5s linear 1 forwards!important;
+.slider.prev .list .item:nth-child(2) .content .button {
+    animation:
+        contentOut 0.7s
+        ease forwards !important;
 }
 
 @keyframes contentOut {
     to {
-        transform: translateY(-150px);
-        filter: blur(20px);
+        transform: translateY(-80px);
+
+        filter: blur(12px);
+
         opacity: 0;
     }
 }
 
 
+/* =========================================================
+   MOBILE
+========================================================= */
 
-/*************************************** responsive****************************************************/
+@media screen and (max-width: 900px) {
 
-
-@media screen and (max-width: 678px) {
-    .slider .list .item .content {
-        padding-right: 0;
+    body {
+        overflow: hidden;
     }
-    .slider .list .item .content .title {
-        font-size: 50px;
-    }
-}
-
-@media screen and (max-width: 678px) {
 
     header {
-        max-width: 95%;
-        height: auto;
-        flex-wrap: wrap;
+        top: 12px;
+
+        width: calc(100% - 24px);
+
+        height: 56px;
+
+        border-radius: 13px;
+    }
+
+    header nav {
+        gap: 2px;
     }
 
     header a {
-        font-size: 12px;
-        padding: 4px 6px;
-    }
+        padding: 9px 12px;
 
-    .slider {
-        height: 100vh;
+        font-size: 11px;
+
+        letter-spacing: 1px;
     }
 
     .slider .list .item img {
@@ -406,80 +854,219 @@ header a:hover {
     }
 
     .slider .list .item .content {
-        top: 20%;
+        top: 42%;
+        left: 50%;
+
         width: 90%;
+
         padding-right: 0;
+
         text-align: center;
     }
 
     .slider .list .item .content .title {
-        font-size: 2.8em;
+        font-size: clamp(32px, 9vw, 55px);
+
         letter-spacing: 2px;
     }
 
     .slider .list .item .content .type {
-        font-size: 1.6em;
+        font-size: 16px;
+
+        line-height: 1.5;
     }
 
     .slider .list .item .button {
-        grid-template-columns: 1fr;
         justify-content: center;
+
+        margin-top: 22px;
+    }
+
+    .slider .list .item .button button {
+        min-width: 125px;
+        height: 43px;
+
+        font-size: 11px;
     }
 
     .thumbnail {
-        bottom: 20px;
+        right: auto;
         left: 50%;
+        bottom: 18px;
+
         transform: translateX(-50%);
-        gap: 10px;
+
+        max-width: calc(100% - 20px);
+
+        gap: 7px;
+
+        padding: 7px;
+
+        overflow: hidden;
     }
 
     .thumbnail .item {
-        width: 90px;
-        height: 130px;
+        width: 67px;
+        height: 90px;
+    }
+
+    .thumbnail .item.active {
+        transform: translateY(-4px) scale(1.03);
     }
 
     .nextPrevArrows {
-        top: auto;
-        bottom: 170px;
+        right: auto;
         left: 50%;
+        bottom: 125px;
+
         transform: translateX(-50%);
-        width: auto;
-        justify-content: center;
-    }
-}
 
-
-/* LOGO OVERLAY - SIMPLE, ALWAYS VISIBLE */
-.logo-overlay {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    z-index: 1000;
-
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-/* LOGOS - FIXED SIZE, NO EFFECTS */
-.logo-overlay img {
-    width: 85px;        /* fixed width */
-    height: 100px;       /* fixed height */
-    object-fit: contain; /* keep proportions */
-}
-
-/* MOBILE RESPONSIVE */
-@media (max-width: 768px) {
-    .logo-overlay {
-        top: 10px;
-        right: 10px;
         gap: 8px;
     }
 
-    .logo-overlay img {
+    .nextPrevArrows button {
         width: 40px;
         height: 40px;
+
+        font-size: 17px;
     }
 }
 
 
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media screen and (max-width: 480px) {
+
+    header {
+        height: 52px;
+    }
+
+    header a {
+        padding: 8px 9px;
+
+        font-size: 10px;
+    }
+
+    .slider .list .item .content {
+        top: 40%;
+    }
+
+    .slider .list .item .content .title {
+        font-size: 29px;
+    }
+
+    .slider .list .item .content .type {
+        font-size: 14px;
+    }
+
+    .thumbnail {
+        bottom: 15px;
+    }
+
+    .thumbnail .item {
+        width: 58px;
+        height: 78px;
+    }
+
+    .nextPrevArrows {
+        bottom: 108px;
+    }
+}
+
+/* =========================================================
+   FIX — HIDE CONTENT OF INACTIVE SLIDES
+========================================================= */
+
+.slider .list .item:not(:first-child) .content {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Only the active slide content is visible */
+.slider .list .item:first-child .content {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   CLEANER DESKTOP CONTENT
+========================================================= */
+
+.slider .list .item .content {
+    top: 50%;
+    left: 50%;
+
+    width: min(1200px, 90%);
+    max-width: none;
+
+    padding-right: 40%;
+
+    transform: translate(-50%, -50%);
+}
+
+
+/* Prevent extremely wide titles */
+.slider .list .item .content .title {
+    max-width: 850px;
+
+    font-size: clamp(48px, 5vw, 76px);
+    line-height: 1.05;
+
+    word-break: normal;
+}
+
+
+/* Subtitle stays underneath title */
+.slider .list .item .content .type {
+    max-width: 650px;
+
+    margin-top: 15px;
+
+    font-size: clamp(17px, 1.8vw, 26px);
+    line-height: 1.45;
+}
+
+
+/* Visit button stays clean */
+.slider .list .item .content .button {
+    margin-top: 28px;
+}
+
+
+/* =========================================================
+   MAKE TRANSITIONS CLEAN
+========================================================= */
+
+.slider .list .item:not(:first-child) .content {
+    animation: none !important;
+    filter: none !important;
+}
+
+.slider .list .item:first-child .content {
+    visibility: visible;
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media screen and (min-width: 901px) {
+
+    .slider .list .item .content {
+        top: 52%;
+    }
+
+    .slider .list .item .content .title {
+        max-width: 850px;
+        font-size: clamp(50px, 5vw, 76px);
+    }
+
+    .slider .list .item .content .type {
+        max-width: 650px;
+    }
+}
