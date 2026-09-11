@@ -1,4 +1,4 @@
-/* MM Group Slider — Responsive & Accessible (production) */
+/* MM Group Slider — Manual Only (auto-next removed), Responsive & Accessible */
 "use strict";
 (() => {
   const slider = document.querySelector(".slider");
@@ -12,11 +12,45 @@
   const navToggle = document.querySelector(".nav-toggle");
   const primaryNav = document.getElementById("primary-nav");
 
+  // Luxury elements (manual progress, no autoplay)
+  const progressFill = slider.querySelector(".progress-fill");
+  const currentEl = slider.querySelector(".slide-counter .current");
+  const totalEl = slider.querySelector(".slide-counter .total");
+  const autoplayToggle = slider.querySelector(".autoplay-toggle");
+
+  // Hide autoplay toggle since auto-next is removed (user requested manual only)
+  if (autoplayToggle) autoplayToggle.style.display = "none";
+  // Stop progress bar animation — make it static indicator
+  if (progressFill) {
+    progressFill.style.animation = "none";
+    progressFill.style.transition = "width 0.45s var(--ease-lux, ease)";
+  }
+
   let isAnimating = false;
-  let autoplayTimer = null;
   let fallbackTimer = null;
-  const autoplayDelay = 6500;
   const SWIPE_THRESHOLD = 42;
+
+  const totalSlides = sliderList ? sliderList.querySelectorAll(".item").length : 0;
+  let currentIndex = 0;
+
+  if (totalEl && totalSlides) totalEl.textContent = String(totalSlides).padStart(2, "0");
+  if (currentEl) currentEl.textContent = "01";
+
+  function updateProgress() {
+    if (!progressFill || !totalSlides) return;
+    const pct = ((currentIndex + 1) / totalSlides) * 100;
+    progressFill.style.width = pct + "%";
+    progressFill.style.animation = "none";
+  }
+
+  function updateCounter() {
+    if (currentEl) currentEl.textContent = String(currentIndex + 1).padStart(2, "0");
+  }
+
+  function updateMeta() {
+    updateCounter();
+    updateProgress();
+  }
 
   function updateActiveState() {
     if (thumbnail) {
@@ -25,7 +59,6 @@
         const isActive = i === 0;
         thumb.classList.toggle("active", isActive);
         thumb.setAttribute("aria-selected", String(isActive));
-        // keep keyboard reachable; active gets tabindex 0, others 0 (roving tabindex optional)
         thumb.tabIndex = 0;
       });
     }
@@ -34,6 +67,7 @@
       const slides = sliderList.querySelectorAll(".item");
       slides.forEach((slide, i) => slide.setAttribute("aria-label", `${i + 1} of ${slides.length}`));
     }
+    updateMeta();
   }
 
   function moveSlider(direction) {
@@ -48,10 +82,12 @@
       sliderList.appendChild(sliderItems[0]);
       thumbnail.appendChild(thumbItems[0]);
       slider.classList.add("next");
+      currentIndex = (currentIndex + 1) % totalSlides;
     } else {
       sliderList.prepend(sliderItems[sliderItems.length - 1]);
       thumbnail.prepend(thumbItems[thumbItems.length - 1]);
       slider.classList.add("prev");
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
     }
 
     const onEnd = () => {
@@ -64,15 +100,18 @@
     slider.addEventListener("animationend", onEnd, { once: true });
     clearTimeout(fallbackTimer);
     fallbackTimer = setTimeout(onEnd, 800);
+    updateCounter();
+    updateProgress();
   }
 
   updateActiveState();
+  updateProgress();
 
-  // Arrow buttons
-  if (nextBtn) nextBtn.addEventListener("click", () => { moveSlider("next"); resetAutoplay(); });
-  if (prevBtn) prevBtn.addEventListener("click", () => { moveSlider("prev"); resetAutoplay(); });
+  // Arrow buttons — manual only
+  if (nextBtn) nextBtn.addEventListener("click", () => moveSlider("next"));
+  if (prevBtn) prevBtn.addEventListener("click", () => moveSlider("prev"));
 
-  // Thumbnail interaction — works with <button> or <div>
+  // Thumbnail interaction
   if (thumbnail) {
     thumbnail.addEventListener("click", (e) => {
       const clicked = e.target.closest(".item");
@@ -89,7 +128,6 @@
         if (steps > 0) setTimeout(step, 650);
       };
       step();
-      resetAutoplay();
     });
 
     thumbnail.addEventListener("keydown", (e) => {
@@ -106,19 +144,19 @@
     });
   }
 
-  // Global keyboard
+  // Global keyboard — manual
   document.addEventListener("keydown", (e) => {
     if (e.target.closest("input, textarea, [contenteditable]")) return;
-    if (e.key === "ArrowRight") { moveSlider("next"); resetAutoplay(); }
-    if (e.key === "ArrowLeft") { moveSlider("prev"); resetAutoplay(); }
+    if (e.key === "ArrowRight") moveSlider("next");
+    if (e.key === "ArrowLeft") moveSlider("prev");
   });
 
-  // Touch swipe
+  // Touch swipe — manual
   let startX = 0, startY = 0, isSwiping = false;
   slider.addEventListener("touchstart", (e) => {
     if (e.touches.length !== 1) return;
     startX = e.touches[0].clientX; startY = e.touches[0].clientY;
-    isSwiping = true; pauseAutoplay();
+    isSwiping = true;
   }, { passive: true });
   slider.addEventListener("touchend", (e) => {
     if (!isSwiping) return;
@@ -129,16 +167,14 @@
     const diffY = endY - startY;
     if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > SWIPE_THRESHOLD) {
       if (diffX < 0) moveSlider("next"); else moveSlider("prev");
-      resetAutoplay();
     }
-    setTimeout(resumeAutoplay, 1200);
   }, { passive: true });
 
-  // Mouse drag
+  // Mouse drag — manual
   let dragStartX = 0, isDragging = false, hasDragged = false;
   slider.addEventListener("mousedown", (e) => {
     isDragging = true; hasDragged = false; dragStartX = e.clientX;
-    slider.style.cursor = "grabbing"; pauseAutoplay();
+    slider.style.cursor = "grabbing";
   });
   window.addEventListener("mousemove", (e) => {
     if (!isDragging) return;
@@ -147,45 +183,22 @@
   window.addEventListener("mouseup", (e) => {
     if (!isDragging) return;
     isDragging = false; slider.style.cursor = "";
-    if (!hasDragged) { resumeAutoplay(); return; }
+    if (!hasDragged) return;
     const diff = e.clientX - dragStartX;
     if (Math.abs(diff) > SWIPE_THRESHOLD) {
       if (diff < 0) moveSlider("next"); else moveSlider("prev");
     }
-    setTimeout(resumeAutoplay, 1200);
   });
 
-  // Autoplay
-  function startAutoplay() {
-    stopAutoplay();
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    autoplayTimer = setInterval(() => moveSlider("next"), autoplayDelay);
-  }
-  function stopAutoplay() { if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; } }
-  function pauseAutoplay() { stopAutoplay(); }
-  function resumeAutoplay() { startAutoplay(); }
-  function resetAutoplay() { stopAutoplay(); startAutoplay(); }
-
-  startAutoplay();
-  slider.addEventListener("mouseenter", pauseAutoplay);
-  slider.addEventListener("mouseleave", resumeAutoplay);
-  slider.addEventListener("focusin", pauseAutoplay);
-  slider.addEventListener("focusout", resumeAutoplay);
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) pauseAutoplay(); else resumeAutoplay();
-  });
-
-  // Nav toggle
+  // Nav toggle — no autoplay hooks needed
   if (navToggle && primaryNav) {
     const closeNav = () => {
       primaryNav.classList.remove("open");
       navToggle.setAttribute("aria-expanded", "false");
-      resumeAutoplay();
     };
     navToggle.addEventListener("click", () => {
       const open = primaryNav.classList.toggle("open");
       navToggle.setAttribute("aria-expanded", String(open));
-      if (open) pauseAutoplay(); else resumeAutoplay();
     });
     document.addEventListener("click", (e) => {
       if (!primaryNav.contains(e.target) && !navToggle.contains(e.target) && primaryNav.classList.contains("open")) closeNav();
